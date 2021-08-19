@@ -1,6 +1,7 @@
 from selenium.webdriver import Chrome
 import time
 
+
 def test_auth_page():
     with Chrome() as browser:
         browser.get('https://qastand.valhalla.pw/login')
