@@ -1,5 +1,4 @@
 from selenium.webdriver import Chrome
-import time
 
 
 def test_auth_page():
@@ -12,4 +11,5 @@ def test_auth_page():
         password.send_keys('!QAZ2wsx')
         buttom = browser.find_element_by_class_name('button.is-block.is-info.is-large.is-fullwidth')
         buttom.click()
-        browser.close()
+
+

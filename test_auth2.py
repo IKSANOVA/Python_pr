@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 from functions import login
@@ -20,3 +18,4 @@ def test_inputs_page():
         assert element_is_present(browser, By.CSS_SELECTOR, ".notification.is-success"), "Сообщение Верно отсутствует"
         assert welcome_text == "Верно", f"Неверный приветственный текст: {welcome_text}"
         assert element_is_present(browser, By.CSS_SELECTOR, ".notification.is-success"), "Верно"
+
