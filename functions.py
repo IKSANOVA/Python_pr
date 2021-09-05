@@ -16,13 +16,3 @@ def element_is_present(browser, by, value):
         return True
     except NoSuchElementException:
         return False
-
-#
-# def chek_menu(browser, by, value):
-#     for browser.{find_elements(by, value)}:
-#             if value == "пельмени":
-#                 print("Я не ем пельмени!")
-#                 break
-#             print("Отлично, вкусные " + food)
-#         else:
-#             print("Хорошо, что не было пельменей!")
