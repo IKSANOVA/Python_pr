@@ -41,3 +41,5 @@ def test_file_page():
         assert element_is_present(browser, By.CSS_SELECTOR, ".notification.is-success"), "Успех присутствует"
         browser.refresh()
         assert not element_is_present(browser, By.CSS_SELECTOR, ".notification.is-success"), "Успех отсутствует"
+
+        
