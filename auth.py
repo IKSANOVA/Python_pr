@@ -1,13 +1,18 @@
 from selenium.webdriver import Chrome
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+
+from functions import wait_until_clickable
 
 
 def test_auth_page():
     with Chrome() as browser:
         browser.get('https://qastand.valhalla.pw/login')
         print(f"{browser.current_url}")
-        email = browser.find_element_by_name('email')
-        email.send_keys('qa_test@test.ru')
-        password = browser.find_element_by_name('password')
-        password.send_keys('!QAZ2wsx')
-        buttom = browser.find_element_by_class_name('button')
-        buttom.click()
+        wait = WebDriverWait(browser, 10)
+        wait_until_clickable(browser, By.NAME, 'email')
+        browser.find_element(By.NAME, "email").send_keys("qa_test@test.ru")
+        wait_until_clickable(browser, By.NAME, 'password')
+        browser.find_element(By.NAME, "password").send_keys("!QAZ2wsx")
+        wait_until_clickable(browser, By.CLASS_NAME, 'button')
+        browser.find_element(By.CLASS_NAME, "button").click()

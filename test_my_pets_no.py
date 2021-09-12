@@ -1,6 +1,8 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
-from functions import login
+from selenium.webdriver.support.wait import WebDriverWait
+
+from functions import login, wait_until_clickable
 from functions import element_is_present
 
 
@@ -9,9 +11,11 @@ def test_my_pets_page():
         browser.get("https://qastand.valhalla.pw/my_pet")
         browser.maximize_window()
         login(browser)
-        name = browser.find_element_by_name('pet')
-        name.send_keys("Собака")
-        conf = browser.find_element_by_css_selector("button").click()
+        wait = WebDriverWait(browser, 10)
+        wait_until_clickable(browser, By.NAME, 'pet')
+        browser.find_element_by_name('pet').send_keys("Собака")
+        wait_until_clickable(browser, By.CSS_SELECTOR, 'button')
+        browser.find_element_by_css_selector("button").click()
         no_text = browser.find_element_by_css_selector(".notification.is-danger").text
         print(no_text)
 
