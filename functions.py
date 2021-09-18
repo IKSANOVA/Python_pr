@@ -1,28 +1,43 @@
+from typing import Tuple
+from webbrowser import Chrome
+
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.remote.webdriver import WebElement
 
 
 def login(browser):
-    email = browser.find_element(By.NAME, "email")
-    email.send_keys("qa_test@test.ru")
-    password = browser.find_element(By.NAME, "password")
-    password.send_keys("!QAZ2wsx")
-    browser.find_element(By.CLASS_NAME, "button").click()
+    wait_until_clickable(browser, By.NAME, 'email').send_keys("qa_test@test.ru")
+    wait_until_clickable(browser, By.NAME, 'password').send_keys("!QAZ2wsx")
+    wait_until_clickable(browser, By.CLASS_NAME, 'button').click()
 
 
-def element_is_present(browser, by, value):
+def wait_until_clickable(driver: Chrome, by: By, value: str, timeout: int = 5) -> WebElement:
+    return WebDriverWait(driver, timeout).until(ec.element_to_be_clickable((by, value)))
+
+
+def wait_until_present(driver: Chrome, by: By, value: str, timeout=5) -> WebElement:
+    return WebDriverWait(driver, timeout).until(ec.presence_of_element_located((by, value)))
+
+
+def wait_until_visible(browser, locator, timeout=10):
+    return WebDriverWait(browser, timeout).until(ec.visibility_of_element_located(locator))
+
+
+def element_is_present(browser: Chrome, by: By, value: str, timeout=10) -> None:
     try:
-        browser.find_element(by, value)
+        wait_until_visible(browser, (by, value), timeout)
         return True
-    except NoSuchElementException:
+    except TimeoutException:
         return False
 
-#
-# def chek_menu(browser, by, value):
-#     for browser.{find_elements(by, value)}:
-#             if value == "пельмени":
-#                 print("Я не ем пельмени!")
-#                 break
-#             print("Отлично, вкусные " + food)
-#         else:
-#             print("Хорошо, что не было пельменей!")
+
+def success_alert_is_present(driver: Chrome, timeout=5) -> bool:
+    alert = WebDriverWait(driver, timeout).until(ec.alert_is_present())
+    assert "Успех!" in alert.text
+
+
+def wait_until_clickable2(driver: Chrome, locator: Tuple, timeout: int = 5) -> WebElement:
+    return WebDriverWait(driver, timeout).until(ec.element_to_be_clickable(locator))
