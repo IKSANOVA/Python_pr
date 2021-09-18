@@ -9,14 +9,9 @@ from selenium.webdriver.remote.webdriver import WebElement
 
 
 def login(browser):
-    wait = WebDriverWait(browser, 10)
-    wait_until_clickable(browser, By.NAME, 'email')
-    browser.find_element(By.NAME, "email").send_keys("qa_test@test.ru")
-    wait_until_clickable(browser, By.NAME, 'password')
-    browser.find_element(By.NAME, "password").send_keys("!QAZ2wsx")
-    wait_until_clickable(browser, By.CLASS_NAME, 'button')
-    browser.find_element(By.CLASS_NAME, "button").click()
-    print(browser.get_cookie("session"))
+    wait_until_clickable(browser, By.NAME, 'email').send_keys("qa_test@test.ru")
+    wait_until_clickable(browser, By.NAME, 'password').send_keys("!QAZ2wsx")
+    wait_until_clickable(browser, By.CLASS_NAME, 'button').click()
 
 
 def wait_until_clickable(driver: Chrome, by: By, value: str, timeout: int = 5) -> WebElement:
