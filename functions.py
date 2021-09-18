@@ -1,3 +1,4 @@
+from typing import Tuple
 from webbrowser import Chrome
 
 from selenium.common.exceptions import TimeoutException
@@ -15,6 +16,7 @@ def login(browser):
     browser.find_element(By.NAME, "password").send_keys("!QAZ2wsx")
     wait_until_clickable(browser, By.CLASS_NAME, 'button')
     browser.find_element(By.CLASS_NAME, "button").click()
+    print(browser.get_cookie("session"))
 
 
 def wait_until_clickable(driver: Chrome, by: By, value: str, timeout: int = 5) -> WebElement:
@@ -40,3 +42,7 @@ def element_is_present(browser: Chrome, by: By, value: str, timeout=10) -> bool:
 def success_alert_is_present(driver: Chrome, timeout=5) -> bool:
     alert = WebDriverWait(driver, timeout).until(ec.alert_is_present())
     assert "Успех!" in alert.text
+
+
+def wait_until_clickable2(driver: Chrome, locator: Tuple, timeout: int = 5) -> WebElement:
+    return WebDriverWait(driver, timeout).until(ec.element_to_be_clickable(locator))
