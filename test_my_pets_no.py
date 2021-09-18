@@ -12,10 +12,8 @@ def test_my_pets_page():
         browser.maximize_window()
         login(browser)
         wait = WebDriverWait(browser, 10)
-        wait_until_clickable(browser, By.NAME, 'pet')
-        browser.find_element_by_name('pet').send_keys("Собака")
-        wait_until_clickable(browser, By.CSS_SELECTOR, 'button')
-        browser.find_element_by_css_selector("button").click()
+        wait_until_clickable(browser, By.NAME, 'pet').send_keys("Собака")
+        wait_until_clickable(browser, By.CSS_SELECTOR, 'button').click()
         no_text = browser.find_element_by_css_selector(".notification.is-danger").text
         print(no_text)
 

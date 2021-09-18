@@ -26,7 +26,7 @@ def wait_until_visible(browser, locator, timeout=10):
     return WebDriverWait(browser, timeout).until(ec.visibility_of_element_located(locator))
 
 
-def element_is_present(browser: Chrome, by: By, value: str, timeout=10) -> bool:
+def element_is_present(browser: Chrome, by: By, value: str, timeout=10) -> None:
     try:
         wait_until_visible(browser, (by, value), timeout)
         return True

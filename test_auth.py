@@ -10,10 +10,8 @@ def test_auth_page():
         browser.get('https://qastand.valhalla.pw/login')
         print(f"{browser.current_url}")
         wait = WebDriverWait(browser, 10)
-        wait_until_clickable(browser, By.NAME, 'email')
-        browser.find_element(By.NAME, "email").send_keys("qa_test@test.ru")
-        wait_until_clickable(browser, By.NAME, 'password')
-        browser.find_element(By.NAME, "password").send_keys("!QAZ2wsx")
+        wait_until_clickable(browser, By.NAME, 'email').send_keys("qa_test@test.ru")
+        wait_until_clickable(browser, By.NAME, 'password').send_keys("!QAZ2wsx")
         wait_until_clickable(browser, By.CLASS_NAME, 'button')
         browser.find_element(By.CLASS_NAME, "button").click()
 

@@ -14,8 +14,8 @@ def test_about_page():
         browser.get("https://qastand.valhalla.pw/about")
         browser.maximize_window()
         login(browser)
-        name = browser.find_element_by_name('name').send_keys("Лилия")
-        iks = browser.find_element_by_name('surname').send_keys("Иксанова")
+        browser.find_element_by_name('name').send_keys("Лилия")
+        browser.find_element_by_name('surname').send_keys("Иксанова")
         checkbox = browser.find_element_by_id("age1")
         assert checkbox.get_attribute("checked"), "Чекбокс включен по умолчанию"
         browser.find_element_by_id("age2").click()
