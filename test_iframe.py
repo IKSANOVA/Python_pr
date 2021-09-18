@@ -1,13 +1,9 @@
-import time
-from itertools import count
-
 from selenium.webdriver import Chrome, ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.webdriver.support.expected_conditions import title_is
 from selenium.webdriver.support.wait import WebDriverWait
 
-from functions import login, element_is_present, wait_until_visible, wait_until_clickable2, success_alert_is_present
+from functions import login, element_is_present, wait_until_visible, wait_until_clickable2
 
 
 def test_new_window():
@@ -15,7 +11,6 @@ def test_new_window():
         browser.get("https://qastand.valhalla.pw/new_window_button")
         browser.maximize_window()
         login(browser)
-        time.sleep(40)
         browser.implicitly_wait(10)
         wait_until_clickable2(browser, (By.CLASS_NAME, "button")).click()
         windows = browser.window_handles
